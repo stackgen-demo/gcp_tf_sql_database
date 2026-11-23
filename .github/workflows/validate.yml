@@ -4,6 +4,7 @@ on:
   pull_request:
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -11,14 +12,26 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    env:
+      HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
-      - uses: actions/checkout@v5
-        with:
-          persist-credentials: false
-      - uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: 1.9.8
-      - run: terraform fmt -check -recursive
-      - run: terraform init -backend=false -input=false
-      - run: terraform validate
-      - run: terraform test
+      - name: Check out the public commit
+        run: |
+          git init
+          git fetch --depth=1 "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git" "$HEAD_SHA"
+          git checkout --detach FETCH_HEAD
+
+      - name: Validate and run mock tests
+        run: |
+          terraform() {
+            docker run --rm \
+              --user "$(id -u):$(id -g)" \
+              --env TF_IN_AUTOMATION=1 \
+              --volume "$GITHUB_WORKSPACE:/workspace" \
+              --workdir /workspace \
+              hashicorp/terraform:1.9.8 "$@"
+          }
+          terraform fmt -check -recursive
+          terraform init -backend=false -input=false -lockfile=readonly
+          terraform validate
+          terraform test
