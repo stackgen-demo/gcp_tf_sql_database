@@ -8,7 +8,7 @@ resource "google_sql_database_instance" "this" {
   settings {
     edition                     = "ENTERPRISE"
     tier                        = var.tier
-    availability_type           = "REGIONAL"
+    availability_type           = "ZONAL"
     deletion_protection_enabled = true
     disk_autoresize             = true
     user_labels                 = var.labels
@@ -21,8 +21,7 @@ resource "google_sql_database_instance" "this" {
 
     backup_configuration {
       enabled                        = true
-      point_in_time_recovery_enabled = true
-      transaction_log_retention_days = 7
+      point_in_time_recovery_enabled = false
 
       backup_retention_settings {
         retained_backups = 14
