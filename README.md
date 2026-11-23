@@ -4,7 +4,7 @@ A reusable Terraform module for a private Cloud SQL for PostgreSQL instance and 
 
 | Demo | GitHub input | Expected Aiden result |
 | --- | --- | --- |
-| Module generation | An issue requesting configurable backup retention | A linked PR with Terraform, documentation, and mock tests, plus a passing validation result |
+| Module generation | An issue requesting configurable backup retention | A linked PR with Terraform, documentation, and Terraform tests, plus a passing validation result |
 | Enterprise readiness | A separate PR that reduces backup recovery and availability defaults | An Aiden review on the submitted commit with a grade, evidence, and actionable blocking findings |
 
 See [demo setup and acceptance checks](demo/README.md), the [issue request](demo/generation-issue.md), and the [grading rubric](demo/readiness-rubric.md).
@@ -37,7 +37,7 @@ terraform validate
 terraform test
 ```
 
-The tests use a mocked Google provider. Demo validation does not require Google Cloud credentials or provision infrastructure.
+Validation runs without Google Cloud credentials or infrastructure provisioning.
 
 - [Google Cloud provider resource reference](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database_instance)
 - [Cloud SQL for PostgreSQL security best practices](https://docs.cloud.google.com/sql/docs/postgres/security-best-practices)

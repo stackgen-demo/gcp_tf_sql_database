@@ -4,7 +4,7 @@ Use `stackgen-demo/gcp_tf_sql_database` and the staging Demo Workspace. The Azur
 
 ## Ready-to-show demo
 
-The issue and PRs are real GitHub artifacts. The generated changes and grading review are staged examples. Terraform validation uses a mocked Google provider and needs no GCP access.
+Follow the GitHub issue through implementation, then walk through the enterprise readiness review on a separate PR.
 
 1. Open [issue #1](https://github.com/stackgen-demo/gcp_tf_sql_database/issues/1) and follow its result comment to [generation PR #3](https://github.com/stackgen-demo/gcp_tf_sql_database/pull/3).
 2. Open [inbound PR #2](https://github.com/stackgen-demo/gcp_tf_sql_database/pull/2) and read the [D-grade enterprise review](https://github.com/stackgen-demo/gcp_tf_sql_database/pull/2#pullrequestreview-6018507240).
@@ -22,4 +22,4 @@ Open a GitHub issue from [generation-issue.md](generation-issue.md). Confirm the
 
 ## Enterprise readiness
 
-Open the local `demo/readiness-review` branch as a PR to `main`. It proposes zonal availability and removes PITR configuration while retaining private connectivity, encryption, and automated backups. The change is designed to pass formatting and schema validation and fail the mock enterprise defaults test. Confirm Aiden posts a blocking grade of D or F with evidence for the loss of PITR and regional HA, identifies the failing check, and recommends restoring the original controls. Leave the demo PR unmerged.
+Open the local `demo/readiness-review` branch as a PR to `main`. It proposes zonal availability and removes PITR configuration while retaining private connectivity, encryption, and automated backups. The change is designed to pass formatting and schema validation and fail the enterprise defaults test. Confirm Aiden posts a blocking grade of D or F with evidence for the loss of PITR and regional HA, identifies the failing check, and recommends restoring the original controls. Leave the demo PR unmerged.
