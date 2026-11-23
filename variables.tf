@@ -46,3 +46,18 @@ variable "labels" {
   default     = {}
   nullable    = false
 }
+
+variable "retained_backups" {
+  description = "Number of automated Cloud SQL backups to retain."
+  type        = number
+  default     = 14
+
+  validation {
+    condition = var.retained_backups == null ? false : (
+      var.retained_backups >= 7 &&
+      var.retained_backups <= 365 &&
+      floor(var.retained_backups) == var.retained_backups
+    )
+    error_message = "retained_backups must be a whole number from 7 through 365."
+  }
+}
