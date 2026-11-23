@@ -2,6 +2,13 @@
 
 Use `stackgen-demo/gcp_tf_sql_database` and the staging Demo Workspace. The Azure proof points are [issue #8](https://github.com/stackgen-demo/azure_tf_sql_database/issues/8) and [PR #9](https://github.com/stackgen-demo/azure_tf_sql_database/pull/9). Keep their repo routing and validation paths active when adding the GCP demo.
 
+## Ready-to-show demo
+
+The issue and PRs are real GitHub artifacts. The generated changes and grading review are staged examples. Terraform validation uses a mocked Google provider and needs no GCP access.
+
+1. Open [issue #1](https://github.com/stackgen-demo/gcp_tf_sql_database/issues/1) and follow its result comment to [generation PR #3](https://github.com/stackgen-demo/gcp_tf_sql_database/pull/3).
+2. Open [inbound PR #2](https://github.com/stackgen-demo/gcp_tf_sql_database/pull/2) and read the [D-grade enterprise review](https://github.com/stackgen-demo/gcp_tf_sql_database/pull/2#pullrequestreview-6018507240).
+
 ## Aiden wiring
 
 - In `terraform-module-update`, which generated Azure PR #9, scope the GitHub issue route to the exact GCP repository in addition to the existing Azure route. Reuse the workspace’s authorized GitHub integration, runner, and model. Use the GCP module at the repository root. Accept an issue opened by a trusted demo operator and permit writes only to the GCP demo repository and generated branches.
