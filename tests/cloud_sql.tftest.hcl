@@ -71,3 +71,59 @@ run "reject_invalid_network" {
 
   expect_failures = [var.private_network]
 }
+
+run "retention_override" {
+  command = plan
+
+  variables {
+    retained_backups = 30
+  }
+
+  assert {
+    condition = (
+      google_sql_database_instance.this.settings[0].backup_configuration[0].backup_retention_settings[0].retained_backups == 30 &&
+      google_sql_database_instance.this.settings[0].backup_configuration[0].backup_retention_settings[0].retention_unit == "COUNT"
+    )
+    error_message = "The configured backup count must reach Cloud SQL in COUNT units."
+  }
+}
+
+run "reject_retention_below_minimum" {
+  command = plan
+
+  variables {
+    retained_backups = 6
+  }
+
+  expect_failures = [var.retained_backups]
+}
+
+run "reject_retention_above_maximum" {
+  command = plan
+
+  variables {
+    retained_backups = 366
+  }
+
+  expect_failures = [var.retained_backups]
+}
+
+run "reject_retention_fractional" {
+  command = plan
+
+  variables {
+    retained_backups = 7.5
+  }
+
+  expect_failures = [var.retained_backups]
+}
+
+run "reject_retention_null" {
+  command = plan
+
+  variables {
+    retained_backups = null
+  }
+
+  expect_failures = [var.retained_backups]
+}

@@ -28,6 +28,8 @@ module "postgres" {
 
 The module defaults to PostgreSQL 16, regional high availability, encrypted connections, IAM database authentication, 14 automated backups, and seven days of point-in-time recovery logs. It enables Terraform and Cloud SQL instance deletion protection and preserves the database on module removal. It exposes the instance ID, instance connection name, and database name.
 
+Set `retained_backups` to keep a different number of automated backups. The input accepts whole numbers from 7 through 365 and defaults to 14. The seven-day PITR log retention is independent of this backup count.
+
 ## Validation
 
 ```bash

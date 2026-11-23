@@ -25,7 +25,7 @@ resource "google_sql_database_instance" "this" {
       transaction_log_retention_days = 7
 
       backup_retention_settings {
-        retained_backups = 14
+        retained_backups = var.retained_backups
         retention_unit   = "COUNT"
       }
     }
